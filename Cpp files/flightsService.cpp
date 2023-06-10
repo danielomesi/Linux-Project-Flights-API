@@ -2,47 +2,44 @@
 
 int main()
 {
-    int choice,pipeToWrite;
+    int choice,pipeToWrite,pipePermissions=0666;
     fs::path cwd = fs::current_path();
     fs::path writePathFS=cwd/"sharedFolder"/"userInput";
     const char* writePath = writePathFS.c_str();
     vector<string> inputNames;
 
-    std::ofstream pipeToWrite(writePath);
+    PrintMenu();
+    choice = GetChoice();
 
-    if (!pipeToWrite.is_open())
+    if (choice >= 1 && choice <= 4)
     {
-        cout<<"Can't open file"<<endl;
+        inputNames = GetData(choice); // put in if in case no need for data
+        cout << "In cases where some of the data is stored on the server, the process could take a few moments." << endl;
+        cout << "Please wait..." << endl;
+    }
+    
+    pipeToWrite=open(writePath, O_WRONLY | O_NONBLOCK);
+    if (pipeToWrite==-1)
+    {
+        cout<<"Failed to open the shared file"<<endl;
     }
     else
     {
-        PrintMenu();
-        choice = GetChoice();
-
-        if (choice >= 1 && choice <= 4)
-        {
-            inputNames = GetData(choice); // put in if in case no need for data
-            cout << "In cases where some of the data is stored on the server, the process could take a few moments." << endl;
-            cout << "Please wait..." << endl;
-        }
-
-        pipeToWrite<<choice<<endl;
+        WriteToPipe(pipeToWrite,choice,inputNames);
     }
-
     
 }
 
 void PrintMenu()
 {
     cout << "Please choose one of the following commands" << endl;
-    cout << "1 - Fetch airports incoming flights." << endl;
-    cout << "2 - Fetch airports full flights schedule." << endl;
-    cout << "3 - Fetch aircraft incoming flights." << endl;
-    cout << "4 - Update DB" << endl;
-    cout << "5 - Zip DB Files." << endl;
-    cout << "6 - Get child process Pid." << endl;
-    cout << "7 - Exit." << endl;
-    cout << "Please type your choice <1,2,3,4,5,6,7>" << endl;
+    cout << "1 - Fetch airports data" << endl;
+    cout << "2 - Print airports incoming flights" << endl;
+    cout << "3 - Print airports full flights schedule" << endl;
+    cout << "4 - Print aircraft full flights schedule" << endl;
+    cout << "5 - Zip DB Files" << endl;
+    cout << "6 - Exit" << endl;
+    cout << "Please type your choice <1,2,3,4,5,6>" << endl;
 }
 
 int GetChoice()
@@ -130,10 +127,24 @@ bool isValidChoice(const string &str)
     return false;
 }
 
-void PrintError()
-{
-    cout << "Error: " << strerror(errno) << " (error number: " << errno << ")" << endl;
-}
+
+
+// void WriteToPipe(const char* writePath, int choice, vector<string> &inputNames)
+// {
+//     std::ofstream pipeToWrite(writePath);
+
+//     if (!pipeToWrite.is_open())
+//     {
+//         errno=ENOENT;
+//         PrintError();
+//     }
+//     pipeToWrite<<choice<<endl;
+//     for (auto arg : inputNames)
+//     {
+//         pipeToWrite<<arg<<endl;
+//     }
+//     pipeToWrite.close();
+// }
 
 void WriteToPipe(int pipeToWrite, int choice, vector<string> &inputNames)
 {

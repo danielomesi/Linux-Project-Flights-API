@@ -9,6 +9,7 @@ include_directories(Headers)
 
 # Add the executable target
 add_executable(flightsService "Cpp files/flightsService.cpp") 
+add_executable(dbService "Cpp files/dbService.cpp") 
 
 # Add the library target
 add_library(Utility SHARED Library/libUtility.cpp)
@@ -17,5 +18,6 @@ add_library(Utility SHARED Library/libUtility.cpp)
 find_library(LIBZIP_LIBRARY zip)
 
 # Link the executable with the libraries
-target_link_libraries(flightsService Utility ${LIBZIP_LIBRARY})
+target_link_libraries(flightsService Utility )
+target_link_libraries(dbService Utility ${LIBZIP_LIBRARY})
 

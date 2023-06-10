@@ -219,3 +219,8 @@ void checkFile(ifstream &file)
 	if (!file.is_open())
 		cout << "File failed to open!" << endl;
 }
+
+void PrintError()
+{
+    cout << "Error: " << strerror(errno) << " (error number: " << errno << ")" << endl;
+}

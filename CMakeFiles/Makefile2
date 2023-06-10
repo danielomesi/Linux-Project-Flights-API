@@ -64,6 +64,7 @@ CMAKE_BINARY_DIR = /home/daniel/Ex03
 
 # The main recursive "all" target.
 all: CMakeFiles/flightsService.dir/all
+all: CMakeFiles/dbService.dir/all
 all: CMakeFiles/Utility.dir/all
 .PHONY : all
 
@@ -73,6 +74,7 @@ preinstall:
 
 # The main recursive "clean" target.
 clean: CMakeFiles/flightsService.dir/clean
+clean: CMakeFiles/dbService.dir/clean
 clean: CMakeFiles/Utility.dir/clean
 .PHONY : clean
 
@@ -83,7 +85,7 @@ clean: CMakeFiles/Utility.dir/clean
 CMakeFiles/flightsService.dir/all: CMakeFiles/Utility.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/flightsService.dir/build.make CMakeFiles/flightsService.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/flightsService.dir/build.make CMakeFiles/flightsService.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/daniel/Ex03/CMakeFiles --progress-num=3,4 "Built target flightsService"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/daniel/Ex03/CMakeFiles --progress-num=5,6 "Built target flightsService"
 .PHONY : CMakeFiles/flightsService.dir/all
 
 # Build rule for subdir invocation for target.
@@ -101,6 +103,32 @@ flightsService: CMakeFiles/flightsService.dir/rule
 CMakeFiles/flightsService.dir/clean:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/flightsService.dir/build.make CMakeFiles/flightsService.dir/clean
 .PHONY : CMakeFiles/flightsService.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/dbService.dir
+
+# All Build rule for target.
+CMakeFiles/dbService.dir/all: CMakeFiles/Utility.dir/all
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/dbService.dir/build.make CMakeFiles/dbService.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/dbService.dir/build.make CMakeFiles/dbService.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/daniel/Ex03/CMakeFiles --progress-num=3,4 "Built target dbService"
+.PHONY : CMakeFiles/dbService.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/dbService.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/daniel/Ex03/CMakeFiles 4
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/dbService.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/daniel/Ex03/CMakeFiles 0
+.PHONY : CMakeFiles/dbService.dir/rule
+
+# Convenience name for target.
+dbService: CMakeFiles/dbService.dir/rule
+.PHONY : dbService
+
+# clean rule for target.
+CMakeFiles/dbService.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/dbService.dir/build.make CMakeFiles/dbService.dir/clean
+.PHONY : CMakeFiles/dbService.dir/clean
 
 #=============================================================================
 # Target rules for target CMakeFiles/Utility.dir

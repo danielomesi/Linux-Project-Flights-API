@@ -351,8 +351,33 @@ CMakeFiles/Utility.dir/Library/libUtility.cpp.o: Library/libUtility.cpp \
   /usr/include/x86_64-linux-gnu/bits/types/struct_iovec.h \
   /usr/include/linux/falloc.h \
   /usr/include/x86_64-linux-gnu/bits/stat.h \
-  /usr/include/x86_64-linux-gnu/bits/struct_stat.h
+  /usr/include/x86_64-linux-gnu/bits/struct_stat.h \
+  /usr/include/x86_64-linux-gnu/sys/stat.h \
+  /usr/include/x86_64-linux-gnu/bits/statx.h \
+  /usr/include/linux/stat.h \
+  /usr/include/linux/types.h \
+  /usr/include/x86_64-linux-gnu/asm/types.h \
+  /usr/include/asm-generic/types.h \
+  /usr/include/asm-generic/int-ll64.h \
+  /usr/include/x86_64-linux-gnu/asm/bitsperlong.h \
+  /usr/include/asm-generic/bitsperlong.h \
+  /usr/include/linux/posix_types.h \
+  /usr/include/linux/stddef.h \
+  /usr/include/x86_64-linux-gnu/asm/posix_types.h \
+  /usr/include/x86_64-linux-gnu/asm/posix_types_64.h \
+  /usr/include/asm-generic/posix_types.h \
+  /usr/include/x86_64-linux-gnu/bits/statx-generic.h \
+  /usr/include/x86_64-linux-gnu/bits/types/struct_statx_timestamp.h \
+  /usr/include/x86_64-linux-gnu/bits/types/struct_statx.h
 
+
+/usr/include/x86_64-linux-gnu/bits/types/struct_statx.h:
+
+/usr/include/linux/posix_types.h:
+
+/usr/include/x86_64-linux-gnu/asm/types.h:
+
+/usr/include/x86_64-linux-gnu/sys/stat.h:
 
 /usr/include/x86_64-linux-gnu/bits/struct_stat.h:
 
@@ -406,6 +431,8 @@ CMakeFiles/Utility.dir/Library/libUtility.cpp.o: Library/libUtility.cpp \
 
 /usr/include/c++/11/bits/deque.tcc:
 
+/usr/include/linux/stat.h:
+
 /usr/include/c++/11/deque:
 
 /usr/include/c++/11/stack:
@@ -456,11 +483,15 @@ CMakeFiles/Utility.dir/Library/libUtility.cpp.o: Library/libUtility.cpp \
 
 /usr/include/c++/11/bits/unordered_map.h:
 
+/usr/include/x86_64-linux-gnu/bits/statx-generic.h:
+
 /usr/include/c++/11/bits/hashtable_policy.h:
 
 /usr/include/c++/11/bits/hashtable.h:
 
 /usr/include/c++/11/unordered_map:
+
+/usr/include/x86_64-linux-gnu/asm/posix_types.h:
 
 /usr/include/c++/11/bits/ranges_util.h:
 
@@ -516,6 +547,8 @@ CMakeFiles/Utility.dir/Library/libUtility.cpp.o: Library/libUtility.cpp \
 
 /usr/include/x86_64-linux-gnu/c++/11/bits/c++locale.h:
 
+/usr/include/x86_64-linux-gnu/bits/statx.h:
+
 /usr/include/unistd.h:
 
 /usr/include/c++/11/bits/stl_algobase.h:
@@ -545,6 +578,8 @@ CMakeFiles/Utility.dir/Library/libUtility.cpp.o: Library/libUtility.cpp \
 /usr/include/c++/11/numbers:
 
 /usr/include/c++/11/bits/string_view.tcc:
+
+/usr/include/x86_64-linux-gnu/asm/posix_types_64.h:
 
 /usr/include/x86_64-linux-gnu/bits/cpu-set.h:
 
@@ -614,6 +649,10 @@ CMakeFiles/Utility.dir/Library/libUtility.cpp.o: Library/libUtility.cpp \
 
 /usr/include/c++/11/bits/functexcept.h:
 
+/usr/include/asm-generic/bitsperlong.h:
+
+/usr/include/asm-generic/types.h:
+
 /usr/include/c++/11/bits/concept_check.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/sigset_t.h:
@@ -655,6 +694,8 @@ Library/libUtility.cpp:
 /usr/include/x86_64-linux-gnu/bits/time.h:
 
 /usr/include/x86_64-linux-gnu/bits/select.h:
+
+/usr/include/x86_64-linux-gnu/asm/bitsperlong.h:
 
 /usr/include/c++/11/backward/binders.h:
 
@@ -840,6 +881,8 @@ Headers/libUtility.h:
 
 /usr/include/c++/11/fstream:
 
+/usr/include/asm-generic/int-ll64.h:
+
 /usr/include/c++/11/bits/stl_algo.h:
 
 /usr/include/c++/11/pstl/execution_defs.h:
@@ -946,9 +989,13 @@ Headers/libUtility.h:
 
 /usr/include/c++/11/bits/locale_facets.h:
 
+/usr/include/x86_64-linux-gnu/bits/types/struct_statx_timestamp.h:
+
 /usr/include/c++/11/cwctype:
 
 /usr/include/c++/11/bits/streambuf_iterator.h:
+
+/usr/include/linux/types.h:
 
 /usr/include/x86_64-linux-gnu/c++/11/bits/ctype_inline.h:
 
@@ -989,6 +1036,8 @@ Headers/libUtility.h:
 /usr/include/x86_64-linux-gnu/c++/11/bits/basic_file.h:
 
 /usr/include/x86_64-linux-gnu/c++/11/bits/c++io.h:
+
+/usr/include/asm-generic/posix_types.h:
 
 /usr/include/c++/11/bits/fstream.tcc:
 
@@ -1031,6 +1080,8 @@ Headers/libUtility.h:
 /usr/include/x86_64-linux-gnu/asm/unistd_64.h:
 
 /usr/include/c++/11/sstream:
+
+/usr/include/linux/stddef.h:
 
 /usr/include/c++/11/bits/refwrap.h:
 

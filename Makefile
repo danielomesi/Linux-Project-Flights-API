@@ -130,6 +130,19 @@ flightsService/fast:
 .PHONY : flightsService/fast
 
 #=============================================================================
+# Target rules for targets named dbService
+
+# Build rule for target.
+dbService: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 dbService
+.PHONY : dbService
+
+# fast build rule for target.
+dbService/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/dbService.dir/build.make CMakeFiles/dbService.dir/build
+.PHONY : dbService/fast
+
+#=============================================================================
 # Target rules for targets named Utility
 
 # Build rule for target.
@@ -141,6 +154,30 @@ Utility: cmake_check_build_system
 Utility/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Utility.dir/build.make CMakeFiles/Utility.dir/build
 .PHONY : Utility/fast
+
+Cpp_files/dbService.o: Cpp_files/dbService.cpp.o
+.PHONY : Cpp_files/dbService.o
+
+# target to build an object file
+Cpp_files/dbService.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/dbService.dir/build.make CMakeFiles/dbService.dir/Cpp_files/dbService.cpp.o
+.PHONY : Cpp_files/dbService.cpp.o
+
+Cpp_files/dbService.i: Cpp_files/dbService.cpp.i
+.PHONY : Cpp_files/dbService.i
+
+# target to preprocess a source file
+Cpp_files/dbService.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/dbService.dir/build.make CMakeFiles/dbService.dir/Cpp_files/dbService.cpp.i
+.PHONY : Cpp_files/dbService.cpp.i
+
+Cpp_files/dbService.s: Cpp_files/dbService.cpp.s
+.PHONY : Cpp_files/dbService.s
+
+# target to generate assembly for a file
+Cpp_files/dbService.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/dbService.dir/build.make CMakeFiles/dbService.dir/Cpp_files/dbService.cpp.s
+.PHONY : Cpp_files/dbService.cpp.s
 
 Cpp_files/flightsService.o: Cpp_files/flightsService.cpp.o
 .PHONY : Cpp_files/flightsService.o
@@ -199,7 +236,11 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... Utility"
+	@echo "... dbService"
 	@echo "... flightsService"
+	@echo "... Cpp_files/dbService.o"
+	@echo "... Cpp_files/dbService.i"
+	@echo "... Cpp_files/dbService.s"
 	@echo "... Cpp_files/flightsService.o"
 	@echo "... Cpp_files/flightsService.i"
 	@echo "... Cpp_files/flightsService.s"

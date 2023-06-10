@@ -93,7 +93,6 @@ flightsService_EXTERNAL_OBJECTS =
 flightsService: CMakeFiles/flightsService.dir/Cpp_files/flightsService.cpp.o
 flightsService: CMakeFiles/flightsService.dir/build.make
 flightsService: libUtility.so
-flightsService: /usr/lib/x86_64-linux-gnu/libzip.so
 flightsService: CMakeFiles/flightsService.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/daniel/Ex03/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable flightsService"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/flightsService.dir/link.txt --verbose=$(VERBOSE)

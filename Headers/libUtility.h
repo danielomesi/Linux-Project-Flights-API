@@ -19,6 +19,8 @@
 #include <sys/wait.h>
 #include <fcntl.h>
 #include <sstream>
+#include <sys/types.h>
+#include <sys/stat.h>
 
 using namespace std;
 
@@ -177,3 +179,4 @@ Aircraft readFlightsByAirCraft(string aircraftStr);
 vector<Flight> readSingleFile(ifstream &file);
 Flight createFlight(string str);
 void checkFile(ifstream &file);
+void PrintError();
