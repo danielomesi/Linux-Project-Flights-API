@@ -17,7 +17,7 @@
 #include <cerrno>
 #include <unistd.h>
 #include <sys/wait.h>
-#include <csignal>
+#include <fcntl.h>
 #include <sstream>
 
 using namespace std;
