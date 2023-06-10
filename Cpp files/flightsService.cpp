@@ -2,30 +2,35 @@
 
 int main()
 {
-    int choice,pipeToWrite,pipePermissions=0666;
+    int choice,pipeToWrite,pipePermissions=0666,pipeToRead;
     fs::path cwd = fs::current_path();
     fs::path writePathFS=cwd/"sharedFolder"/"userInput";
     const char* writePath = writePathFS.c_str();
+     fs::path readPathFS=cwd/"sharedFolder"/"output";
+    const char* readPath = readPathFS.c_str();
     vector<string> inputNames;
 
-    PrintMenu();
-    choice = GetChoice();
+    while (true)
+    {
+        PrintMenu();
+        choice = GetChoice();
 
-    if (choice >= 1 && choice <= 4)
-    {
-        inputNames = GetData(choice); // put in if in case no need for data
-        cout << "In cases where some of the data is stored on the server, the process could take a few moments." << endl;
-        cout << "Please wait..." << endl;
-    }
-    
-    pipeToWrite=open(writePath, O_WRONLY | O_NONBLOCK);
-    if (pipeToWrite==-1)
-    {
-        cout<<"Failed to open the shared file"<<endl;
-    }
-    else
-    {
+        if (choice >= 1 && choice <= 4)
+        {
+            inputNames = GetData(choice); // put in if in case no need for data
+            cout << "In cases where some of the data is stored on the server, the process could take a few moments." << endl;
+            cout << "Please wait..." << endl;
+        }
+        mkfifo(writePath,pipePermissions);
+        pipeToWrite=getPipeToWrite(writePath);
         WriteToPipe(pipeToWrite,choice,inputNames);
+        pipeToRead=getPipeToRead(readPath);
+        printDataFromPipe(pipeToRead);
+        if (choice==6)
+        {
+            cout<<"Thanks for using me, bye :)"<<endl;
+            exit(0);
+        }
     }
     
 }
@@ -128,24 +133,6 @@ bool isValidChoice(const string &str)
 }
 
 
-
-// void WriteToPipe(const char* writePath, int choice, vector<string> &inputNames)
-// {
-//     std::ofstream pipeToWrite(writePath);
-
-//     if (!pipeToWrite.is_open())
-//     {
-//         errno=ENOENT;
-//         PrintError();
-//     }
-//     pipeToWrite<<choice<<endl;
-//     for (auto arg : inputNames)
-//     {
-//         pipeToWrite<<arg<<endl;
-//     }
-//     pipeToWrite.close();
-// }
-
 void WriteToPipe(int pipeToWrite, int choice, vector<string> &inputNames)
 {
     int size = inputNames.size(), sizeOfArg;
@@ -159,4 +146,62 @@ void WriteToPipe(int pipeToWrite, int choice, vector<string> &inputNames)
         write(pipeToWrite, arg.c_str(), arg.size());
     }
     close(pipeToWrite);
+}
+
+int getPipeToRead(const char* readPath)
+{
+    int pipe;
+
+    pipe=open(readPath, O_RDONLY);
+
+    if (pipe==-1)
+    {
+        errno=ENOENT;
+        PrintError();
+        exit(errno);
+    }
+    
+    return pipe;
+}
+
+int getPipeToWrite(const char* writePath)
+{
+    int pipe;
+
+    pipe=open(writePath, O_WRONLY);
+
+    if (pipe==-1)
+    {
+        errno=ENOENT;
+        PrintError();
+        exit(errno);
+    }
+    
+    return pipe;
+}
+
+void printDataFromPipe(int pipefd)
+{
+    const int bufferSize = 1024;
+    char buffer[bufferSize];
+    bool isBlocking=true;
+    ssize_t bytesRead;
+    int flags;
+
+
+    while ((bytesRead = read(pipefd, buffer, bufferSize - 1)) > 0)
+    {
+        buffer[bytesRead] = '\0';  
+
+        std::cout << buffer;  
+        buffer[0] = '\0';
+        if (isBlocking)
+        {
+        flags = fcntl(pipefd, F_GETFL, 0);
+        fcntl(pipefd, F_SETFL, flags | O_NONBLOCK);
+        isBlocking=false;
+        }
+    }
+
+    close(pipefd);
 }
