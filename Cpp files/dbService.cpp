@@ -4,7 +4,9 @@ int main()
 {
     int choice, pipeToRead;
     fs::path cwd = fs::current_path();
-    fs::path readPathFS=cwd/"sharedFolder"/"userInput";
+    fs::path writePathFS=cwd/"sharedFolder"/"output";
+    const char* writePath = writePathFS.c_str();
+     fs::path readPathFS=cwd/"sharedFolder"/"userInput";
     const char* readPath = readPathFS.c_str();
     vector<Airport> airportsOfDB;
     vector<Aircraft> aircraftsOfDB;
@@ -13,7 +15,11 @@ int main()
 
     while(true)
     {
+        remove(writePath);
+        remove(readPath);
         extractDB();
+        CreateNamedPipe(writePath);
+        CreateNamedPipe(readPath);
         pipeToRead=getPipeToRead(readPath);
         inputNames=readFromPipe(pipeToRead,&choice);
         getLocalData(airportsOfDB,aircraftsOfDB);
@@ -23,12 +29,6 @@ int main()
         {
             zipDB();
         }
-        if (choice==EXIT)
-        {
-            cout<<"DB Service is exiting..."<<endl;
-            exit(0);
-        }
-        
     }
         
 }
@@ -190,16 +190,15 @@ void ExecuteChoice(int choice, vector<string> &inputNames, vector<Airport>& airp
     fs::path cwd = fs::current_path();
     fs::path writePathFS=cwd/"sharedFolder"/"output";
     const char* writePath = writePathFS.c_str();
-    int pipePermissions=0666,pipeToWrite;
-
-    mkfifo(writePath,pipePermissions);
+    int pipeToWrite;
+    char nullTerminator='\0';
 
     pipeToWrite=getPipeToWrite(writePath);
     dup2(pipeToWrite, STDOUT_FILENO);
     switch (choice)
     {
     case FETCH_AIRPORTS_DATA:
-        //ADD
+        loadDatabase(inputNames);
         break;    
     case PRINT_ARRIVAL_FLIGHTS:
         getArrivalsDataByAirport(inputNames, airportsDB);
@@ -214,8 +213,15 @@ void ExecuteChoice(int choice, vector<string> &inputNames, vector<Airport>& airp
         zipDB();
         cout<<"Data has been zipped successfully"<<endl;
         break;
+    case EXIT:
+        cout<<"DB Service is dying..."<<endl;
     }
+    write(pipeToWrite,&nullTerminator,1);
     close(pipeToWrite);
+    if (choice==EXIT)
+    {
+        exit(0);
+    }
 }
 
 void getAirplaneDataByIcao24(vector<string> &icao24Args, vector<Aircraft> &aircraftsDB)
@@ -511,4 +517,15 @@ void printDateFromUnix(int unixNumber)
     if (to_string((int)tmTime->tm_min).length() == 1)
         cout << "0";
     cout << tmTime->tm_min;
+}
+
+void CreateNamedPipe(const char* filePath)
+{
+    int pipePermissions=0666;
+
+    if (mkfifo(filePath,pipePermissions)==-1 && errno!=EEXIST)
+    {
+       errno=ENOENT;
+       PrintError();
+    }
 }

@@ -37,5 +37,4 @@ int isAicraftInDB(vector<Aircraft> &aircraftDB, string aircraftName);
 void printArrivalsData(vector<Airport> &database);
 void removeDir(string folderName);
 void printDateFromUnix(int unixNumber);
-
-
+void CreateNamedPipe(const char* filePath);

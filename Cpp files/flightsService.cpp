@@ -21,7 +21,7 @@ int main()
             cout << "In cases where some of the data is stored on the server, the process could take a few moments." << endl;
             cout << "Please wait..." << endl;
         }
-        mkfifo(writePath,pipePermissions);
+
         pipeToWrite=getPipeToWrite(writePath);
         WriteToPipe(pipeToWrite,choice,inputNames);
         pipeToRead=getPipeToRead(readPath);
@@ -86,11 +86,11 @@ vector<string> GetNames(bool isAirport)
     vector<string> allValidNames;
     cout << "Note: the data you request will be fetched from the local database if possible,\nIf you wish to get updated data, use the 'Update Database' option in main menu.\n"
          << endl;
-    cout << "Please write the arguments seperated by enter, to finish type 'E' (end)" << endl;
+    cout << "Please write at least one valid argument (seperate multiple arguments by enter)\nTo finish type 'E' (end)" << endl;
     getline(cin, arg);
-    while (!(isFinish && !allValidNames.empty()))
+    while (!isFinish || allValidNames.empty())
     {
-        if (arg == "E")
+        if (arg == "E" && !allValidNames.empty())
         {
             isFinish = true;
         }
@@ -127,7 +127,7 @@ vector<string> GetNames(bool isAirport)
 
 bool isValidChoice(const string &str)
 {
-    if (str == "1" || str == "2" || str == "3" || str == "4" || str == "5" || str == "6" || str == "7")
+    if (str == "1" || str == "2" || str == "3" || str == "4" || str == "5" || str == "6")
         return true;
     return false;
 }
@@ -145,7 +145,7 @@ void WriteToPipe(int pipeToWrite, int choice, vector<string> &inputNames)
         write(pipeToWrite, &sizeOfArg, sizeof(int));
         write(pipeToWrite, arg.c_str(), arg.size());
     }
-    close(pipeToWrite);
+    
 }
 
 int getPipeToRead(const char* readPath)
@@ -182,26 +182,32 @@ int getPipeToWrite(const char* writePath)
 
 void printDataFromPipe(int pipefd)
 {
-    const int bufferSize = 1024;
+    const int bufferSize=1024;
     char buffer[bufferSize];
-    bool isBlocking=true;
     ssize_t bytesRead;
+    bool isBlocking=true;
     int flags;
 
-
-    while ((bytesRead = read(pipefd, buffer, bufferSize - 1)) > 0)
+    while ((bytesRead = read(pipefd, buffer, sizeof(buffer)-1)) > 0)
     {
-        buffer[bytesRead] = '\0';  
+        buffer[bytesRead]='\0';
+        cout<<buffer;
 
-        std::cout << buffer;  
-        buffer[0] = '\0';
-        if (isBlocking)
+        if (buffer[bytesRead-1]=='\0')
+        {
+            break;
+        }
+
+    /*
+    if (isBlocking)
         {
         flags = fcntl(pipefd, F_GETFL, 0);
         fcntl(pipefd, F_SETFL, flags | O_NONBLOCK);
         isBlocking=false;
         }
+    */
     }
 
-    close(pipefd);
+   close(pipefd);
 }
+

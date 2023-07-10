@@ -12,3 +12,4 @@ int getPipeToWrite(const char* writePath);
 int getPipeToRead(const char* readPath);
 void printDataFromPipe(int pipefd);
 
+
