@@ -65,10 +65,6 @@ Follow these steps to get Flight Data Service up and running on your system usin
 *   Ido Beit On
 *   Sara Benita
 
-## License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
-
 ## Screenshots
 
 Getting the list of flights according to airport (airport must be given in icao format)
