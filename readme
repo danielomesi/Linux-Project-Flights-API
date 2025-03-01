@@ -1,8 +1,5 @@
 # Flight Data Service (Containerized)
 
-[![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT) <!-- Replace with your license badge if you choose one -->
-[![Docker Hub](https://img.shields.io/badge/Docker-Published-blue)](https://hub.docker.com/r/your-dockerhub-username/your-repository-name) <!-- Replace with your Docker Hub link -->
-
 **Experience the power of real-time flight data with Flight Data Service, now fully containerized for seamless deployment and execution! This application provides an efficient and robust solution for accessing and displaying flight information for airports and aircrafts. This project utilizes a client/server architecture, with the two components running in separate Docker containers for enhanced isolation and portability.**
 
 ## Project Overview
