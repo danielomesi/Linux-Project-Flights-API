@@ -19,7 +19,8 @@ The containers communicate through named pipes, ensuring a clean separation of c
 *   **Command-Line Interface:** User-friendly CLI for interacting with flight data within the `flightsService` container.
 *   **Airport Data:** Fetch and display data for specific airports, including full schedule and arrivals.
 *   **Aircraft Data:** Fetch and display data for specific aircrafts, including full schedule.
-* **Zip DB:** Database is zipped at each execution.
+*   **Data** Relevant data is saved in a mapped shared folder between both containers.
+*    **Zip DB:** Database is zipped at each execution.
 
 ## Getting Started (Docker)
 
@@ -60,14 +61,21 @@ Follow these steps to get Flight Data Service up and running on your system usin
 
 ## Project Team
 
-*   Daniel Omesi, ID 207689092
-*   Ido Beit On, ID 208538488
-*   Sara Benita, ID 209297225
-
-## Contributing
-
-Contributions are welcome! Please read the `CONTRIBUTING.md` file for details.
+*   Daniel Omesi
+*   Ido Beit On
+*   Sara Benita
 
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
+
+## Screenshots
+
+Getting the list of flights according to airport (airport must be given in icao format)
+
+![image](readme-images/flights-by-airport.png)
+
+
+Getting the list of flights according to aircraft (aircraft must be given in icao24 format)
+
+![image](readme-images/flights-by-aircraft.png)
